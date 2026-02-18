@@ -1,0 +1,33 @@
+<Control xmlns="https://spacestation14.io">
+    <PanelContainer StyleClasses="BackgroundPanelDark" Margin="8,0,8,8">
+    <BoxContainer Margin="8,0,8,8" Orientation="Vertical">
+        <BoxContainer Orientation="Horizontal">
+            <Label Name="ItemName" HorizontalExpand="True" HorizontalAlignment="Left"/>
+            <BoxContainer Orientation="Horizontal">
+                <Label HorizontalExpand="True" HorizontalAlignment="Center" Text="Stock: "/>
+                <Label Name="ItemStock" HorizontalExpand="True" HorizontalAlignment="Center" Access="Public" />
+            </BoxContainer>
+        </BoxContainer>
+        <PanelContainer StyleClasses="HighDivider" Margin="0,1,0,2"/>
+        <BoxContainer HorizontalExpand="True" Orientation="Horizontal">
+            <BoxContainer Orientation="Vertical" VerticalAlignment="Center" Margin="0,0,4,0">
+                <EntityPrototypeView
+                    Name="ItemView"
+                    Margin="0,0,4,0"
+                    MinSize="80 80"
+                    Scale="2 2"/>
+                <Button
+                    Name="ItemRedeemButton"
+                    Text="Redeem"
+                    MinWidth="48"
+                    MaxHeight="48"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0,4,0,0"
+                    Access="Public" />
+            </BoxContainer>
+            <RichTextLabel Name="ItemDescription" VerticalAlignment="Top" MaxWidth="300"/>
+        </BoxContainer>
+    </BoxContainer>
+    </PanelContainer>
+</Control>

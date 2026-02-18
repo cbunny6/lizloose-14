@@ -17,15 +17,16 @@
   id: ClothingGenderPinBase
   abstract: true
   components:
-  - type: ChameleonClothing
-    slot: Neck
+  #- type: ChameleonClothing
+  #  slot: Neck
 #    default: ClothingNeckLGBTPin
-    requireTag: GenderPin
-    affectedByEmp: false
-  - type: UserInterface
-    interfaces:
-      enum.ChameleonUiKey.Key:
-        type: ChameleonBoundUserInterface
+  #  requireTag: GenderPin
+  #  affectedByEmp: false
+  #- type: UserInterface
+  #  interfaces:
+  #    enum.ChameleonUiKey.Key:
+  #      type: ChameleonBoundUserInterface
+  - type: TrackedDrip
   - type: Tag
     tags:
     - ClothMade #idk man its on the parent
@@ -42,8 +43,8 @@
     state: lgbt
   - type: Clothing
     equippedPrefix: lgbt
-  - type: ChameleonClothing
-    default: ClothingNeckLGBTPin
+#  - type: ChameleonClothing
+#    default: ClothingNeckLGBTPin
 
 - type: entity
   parent: ClothingGenderPinBase
@@ -55,8 +56,8 @@
     state: ally
   - type: Clothing
     equippedPrefix: ally
-  - type: ChameleonClothing
-    default: ClothingNeckAllyPin
+#  - type: ChameleonClothing
+#    default: ClothingNeckAllyPin
 
 - type: entity
   parent: ClothingGenderPinBase
@@ -68,8 +69,8 @@
     state: aro
   - type: Clothing
     equippedPrefix: aro
-  - type: ChameleonClothing
-    default: ClothingNeckAromanticPin
+#  - type: ChameleonClothing
+#    default: ClothingNeckAromanticPin
 
 - type: entity
   parent: ClothingGenderPinBase
@@ -81,8 +82,8 @@
     state: aroace
   - type: Clothing
     equippedPrefix: aroace
-  - type: ChameleonClothing
-    default: ClothingNeckAroacePin
+#  - type: ChameleonClothing
+#    default: ClothingNeckAroacePin
 
 - type: entity
   parent: ClothingGenderPinBase
@@ -94,8 +95,8 @@
     state: asex
   - type: Clothing
     equippedPrefix: asex
-  - type: ChameleonClothing
-    default: ClothingNeckAsexualPin
+#  - type: ChameleonClothing
+#    default: ClothingNeckAsexualPin
 
 - type: entity
   parent: ClothingGenderPinBase
@@ -107,8 +108,8 @@
     state: bi
   - type: Clothing
     equippedPrefix: bi
-  - type: ChameleonClothing
-    default: ClothingNeckBisexualPin
+#  - type: ChameleonClothing
+#    default: ClothingNeckBisexualPin
 
 - type: entity
   parent: ClothingGenderPinBase
@@ -120,8 +121,8 @@
     state: gay
   - type: Clothing
     equippedPrefix: gay
-  - type: ChameleonClothing
-    default: ClothingNeckGayPin
+#  - type: ChameleonClothing
+#    default: ClothingNeckGayPin
 
 - type: entity
   parent: ClothingGenderPinBase
@@ -133,8 +134,8 @@
     state: inter
   - type: Clothing
     equippedPrefix: inter
-  - type: ChameleonClothing
-    default: ClothingNeckIntersexPin
+#  - type: ChameleonClothing
+#    default: ClothingNeckIntersexPin
 
 - type: entity
   parent: ClothingGenderPinBase
@@ -146,8 +147,8 @@
     state: les
   - type: Clothing
     equippedPrefix: les
-  - type: ChameleonClothing
-    default: ClothingNeckLesbianPin
+#  - type: ChameleonClothing
+#    default: ClothingNeckLesbianPin
 
 - type: entity
   parent: ClothingGenderPinBase
@@ -159,8 +160,8 @@
     state: non
   - type: Clothing
     equippedPrefix: non
-  - type: ChameleonClothing
-    default: ClothingNeckNonBinaryPin
+#  - type: ChameleonClothing
+#    default: ClothingNeckNonBinaryPin
 
 - type: entity
   parent: ClothingGenderPinBase
@@ -172,8 +173,8 @@
     state: pan
   - type: Clothing
     equippedPrefix: pan
-  - type: ChameleonClothing
-    default: ClothingNeckPansexualPin
+#  - type: ChameleonClothing
+#    default: ClothingNeckPansexualPin
 
 - type: entity
   parent: ClothingGenderPinBase
@@ -185,8 +186,8 @@
     state: plural
   - type: Clothing
     equippedPrefix: plural
-  - type: ChameleonClothing
-    default: ClothingNeckPluralPin
+#  - type: ChameleonClothing
+#    default: ClothingNeckPluralPin
 
 - type: entity
   parent: ClothingGenderPinBase
@@ -198,8 +199,8 @@
     state: omni
   - type: Clothing
     equippedPrefix: omni
-  - type: ChameleonClothing
-    default: ClothingNeckOmnisexualPin
+#  - type: ChameleonClothing
+#    default: ClothingNeckOmnisexualPin
 
 - type: entity
   parent: ClothingGenderPinBase
@@ -211,8 +212,8 @@
     state: gender
   - type: Clothing
     equippedPrefix: gender
-  - type: ChameleonClothing
-    default: ClothingNeckGenderqueerPin
+#  - type: ChameleonClothing
+#    default: ClothingNeckGenderqueerPin
 
 - type: entity
   parent: ClothingGenderPinBase
@@ -224,8 +225,8 @@
     state: fluid
   - type: Clothing
     equippedPrefix: fluid
-  - type: ChameleonClothing
-    default: ClothingNeckGenderfluidPin
+#  - type: ChameleonClothing
+#    default: ClothingNeckGenderfluidPin
 
 - type: entity
   parent: ClothingGenderPinBase
@@ -237,8 +238,8 @@
     state: trans
   - type: Clothing
     equippedPrefix: trans
-  - type: ChameleonClothing
-    default: ClothingNeckTransPin
+#  - type: ChameleonClothing
+#    default: ClothingNeckTransPin
 
 - type: entity
   parent: ClothingNeckPinBase

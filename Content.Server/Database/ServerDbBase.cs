@@ -43,6 +43,51 @@ namespace Content.Server.Database
             _opsLog = opsLog;
         }
 
+        #region UM
+
+        public async Task<List<DripTrack>> GetDrip(Guid player, CancellationToken cancel = default)
+        {
+            await using var db = await GetDb(cancel);
+
+            return await db.DbContext.DripTrack
+                .Where(p => p.PlayerId == player)
+                .ToListAsync(cancel);
+        }
+
+        public async Task UpdateDrip(IReadOnlyCollection<DripTrackingUpdate> updates)
+        {
+            await using var db = await GetDb();
+
+            var players = updates.Select(u => u.User.UserId).Distinct().ToArray();
+
+            var dbRounds = (await db.DbContext.DripTrack
+                    .Where(p => players.Contains(p.PlayerId))
+                    .ToArrayAsync())
+                .GroupBy(p => p.PlayerId)
+                .ToDictionary(g => g.Key, g => g.ToDictionary(p => p.DripName, p => p));
+
+            foreach (var (user, protoId, rounds) in updates)
+            {
+                if (dbRounds.TryGetValue(user.UserId, out var userTracks)
+                    && userTracks.TryGetValue(protoId, out var dripTrack))
+                {
+                    dripTrack.RoundsLeft = rounds;
+                    continue;
+                }
+                var entry = new DripTrack
+                {
+                    PlayerId = user,
+                    DripName = protoId,
+                    RoundsLeft = rounds
+                };
+
+                db.DbContext.DripTrack.Add(entry);
+            }
+
+            await db.DbContext.SaveChangesAsync();
+        }
+        #endregion
+
         #region Preferences
         public async Task<PlayerPreferences?> GetPlayerPreferencesAsync(
             NetUserId userId,

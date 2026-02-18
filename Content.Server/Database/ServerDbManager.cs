@@ -35,6 +35,14 @@ namespace Content.Server.Database
 
         Task<bool> HasPendingModelChanges();
 
+        #region UM
+
+        Task<List<DripTrack>> GetDrip(Guid player, CancellationToken cancel = default);
+        Task UpdateDrip(IReadOnlyCollection<DripTrackingUpdate> updates);
+
+
+        #endregion
+
         #region Preferences
         Task<PlayerPreferences> InitPrefsAsync(
             NetUserId userId,
@@ -555,6 +563,23 @@ namespace Content.Server.Database
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.UpdatePlayTimes(updates));
         }
+
+        #endregion
+
+        #region UM
+
+        public Task<List<DripTrack>> GetDrip(Guid player, CancellationToken cancel)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetDrip(player, cancel));
+        }
+
+        public Task UpdateDrip(IReadOnlyCollection<DripTrackingUpdate> updates)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.UpdateDrip(updates));
+        }
+
 
         #endregion
 
@@ -1191,6 +1216,10 @@ namespace Content.Server.Database
     }
 
     public sealed record PlayTimeUpdate(NetUserId User, string Tracker, TimeSpan Time);
+
+    //UM START
+    public sealed record DripTrackingUpdate(NetUserId User, string ProtoId, int Rounds);
+    //UM END
 
     internal sealed class SyncAsyncEnumerable<T> : IAsyncEnumerable<T>
     {
