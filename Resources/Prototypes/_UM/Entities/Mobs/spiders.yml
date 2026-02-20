@@ -16,7 +16,6 @@
         Asphyxiation: -1.0
   - type: StatusEffects
     allowed:
-    - Electrocution
     - TemporaryBlindness
     - Pacified
     - Flashed
@@ -319,6 +318,9 @@
   - type: MeleeChemicalInjector
     transferAmount: 4
     solution: melee
+    blacklist:
+      tags:
+      - Spider
   - type: DamageStateVisuals
     states:
       Alive:
@@ -453,5 +455,5 @@
       path: /Audio/Effects/bite.ogg
     damage:
       types:
-        Blunt: 15
-        Slash: 15
+        Blunt: 13
+        Slash: 13
