@@ -35,6 +35,10 @@
     rules:
     - id: Thief
       prob: 0.5
+    #UM START
+    - id: SubChangeling
+      prob: 0.5
+    #UM END
     - id: Xenoborgs
       prob: 0.05
 
@@ -264,7 +268,7 @@
     selectionTime: IntraPlayerSpawn
     definitions:
     - prefRoles: [ Changeling ]
-      max: 3
+      max: 2
       playerRatio: 15
       briefing:
         text: changeling-role-greeting
@@ -272,25 +276,44 @@
         sound: /Audio/Ambience/Antag/changeling_start.ogg
       components:
       - type: ChangelingDevour
+        #UM START
+        changelingDevourAction: UMActionChangelingDevour
+        #UM END
       - type: ChangelingIdentity
       - type: ChangelingTransform
+        #UM START
+        changelingTransformAction: UMActionChangelingTransform
+        #UM END
       - type: ActionGrant
         actions:
-        - ActionChangelingStore
+        - UMActionChangelingStore #UM EDIT
+        #UM START
+        - ActionEnterStasis
+        #UM END
+      #UM START
+      - type: UMChangeling
+      - type: EnergyContainer
+        types:
+        - ChangelingChemicalEnergy
+      #UM END
       # TODO: Make it so the changeling gamerule changeling can inherit from the changeling store preset somehow
       - type: Store
         name: store-preset-name-changeling
         categories:
-        - ChangelingAbilities
+        #UM START
+        - UMChangelingAbilities
+        #UM END
         currencyWhitelist:
         - ChangelingDNA
         balance:
-          ChangelingDNA: 50
-      - type: UserInterface
-        interfaces:
-          enum.StoreUiKey.Key:
-            type: StoreBoundUserInterface
-            requireInputValidation: false
+          ChangelingDNA: 15 #UM EDIT
+#UM START
+#      - type: UserInterface
+#        interfaces:
+#          enum.StoreUiKey.Key:
+#            type: StoreBoundUserInterface
+#            requireInputValidation: false
+#UM END
       mindRoles:
       - MindRoleChangeling
   - type: AntagObjectives
