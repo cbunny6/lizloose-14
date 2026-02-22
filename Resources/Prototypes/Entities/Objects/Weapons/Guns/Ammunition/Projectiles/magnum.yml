@@ -41,8 +41,9 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 26 # 20% decrease
-    ignoreResistances: true
+        Piercing: 30 # 15% decrease
+        Structural: 10
+    ignoreResistances: true # its basically doing 40 structural
 
 - type: entity
   parent: BaseBulletUranium
