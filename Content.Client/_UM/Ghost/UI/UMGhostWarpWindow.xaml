@@ -1,0 +1,16 @@
+<DefaultWindow xmlns="https://spacestation14.io"
+               xmlns:system="clr-namespace:System;assembly=System.Runtime"
+               Title="{Loc 'ghost-target-window-title'}"
+               MinSize="600 250"
+               SetSize="600 300">
+
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True" SizeFlagsStretchRatio="0.4">
+        <Button Name="GhostnadoButton" Text="{Loc 'ghost-target-window-warp-to-most-followed'}" HorizontalAlignment="Center" Margin="0 4" />
+        <LineEdit Name="SearchBar" PlaceHolder="Search" HorizontalExpand="True" Margin="0 4" />
+        <ScrollContainer Name="GhostScroll" VerticalExpand="True" HorizontalExpand="True" HScrollEnabled="False">
+            <BoxContainer Name="CategoryContainer" Orientation="Vertical" Align="Begin" VerticalAlignment="Top">
+                <!-- categories are here -->
+            </BoxContainer>
+        </ScrollContainer>
+    </BoxContainer>
+</DefaultWindow>
