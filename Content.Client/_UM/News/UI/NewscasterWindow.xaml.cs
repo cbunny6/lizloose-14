@@ -8,34 +8,37 @@ namespace Content.Client._UM.News.UI;
 [GenerateTypedNameReferences]
 public sealed partial class NewscasterWindow : FancyWindow
 {
+    public List<NewsArticle> Articles = new();
+
     public NewscasterWindow()
     {
         RobustXamlLoader.Load(this);
     }
 
-    public void OpenWindow()
-    {
-        NoArticleText.Visible = true;
-    }
-
-    public void UpdateState(List<NewsArticle> articles)
+    private void CreateEntries()
     {
         EntryTable.RemoveAllChildren();
 
-        if (articles.Count == 0)
+        if (Articles.Count == 0)
         {
             NoArticleText.Visible = true;
             return;
         }
         NoArticleText.Visible = false;
-        articles.Reverse();
-        foreach (var article in articles)
+        foreach (var article in Articles)
         {
             AddEntry(article.Title, article.Author, article.Content, article.ShareTime);
         }
     }
 
-    public void AddEntry(string title, string? author, string contents, TimeSpan publishTime)
+    public void Update(List<NewsArticle> articles)
+    {
+        Articles = articles;
+        articles.Reverse();
+        CreateEntries();
+    }
+
+    private void AddEntry(string title, string? author, string contents, TimeSpan publishTime)
     {
         var entry = new NewscasterEntry(title, author, contents, publishTime);
         EntryTable.AddChild(entry);

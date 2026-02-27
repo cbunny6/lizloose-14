@@ -3,6 +3,7 @@ using Content.Shared._UM.News.Components;
 using Content.Shared.Chat;
 using Content.Shared.MassMedia.Components;
 using Content.Shared.MassMedia.Systems;
+using Content.Shared.Power.EntitySystems;
 using Content.Shared.Station;
 
 namespace Content.Shared._UM.News;
@@ -10,22 +11,23 @@ namespace Content.Shared._UM.News;
 /// <summary>
 /// This handles news reading machines, such as the newscaster
 /// </summary>
-public sealed class NewscasterSystem : EntitySystem
+public abstract class SharedNewscasterSystem : EntitySystem
 {
     [Dependency] private readonly SharedStationSystem _station = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] protected readonly SharedUserInterfaceSystem UserInterfaceSystem = default!;
     [Dependency] private readonly SharedChatSystem _chat = default!;
+    [Dependency] private readonly SharedPowerReceiverSystem _powerReceiver = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<NewscasterComponent, BoundUIOpenedEvent>(OnOpened);
+        SubscribeLocalEvent<NewscasterComponent, MapInitEvent>(OnMapInit);
     }
 
-    private void OnOpened(Entity<NewscasterComponent> ent, ref BoundUIOpenedEvent args)
+    private void OnMapInit(Entity<NewscasterComponent> ent, ref MapInitEvent args)
     {
-        UpdateNewscasterUiState(ent);
+        UpdateNewscaster(ent);
     }
 
     /// <summary>
@@ -33,20 +35,22 @@ public sealed class NewscasterSystem : EntitySystem
     /// </summary>
     public void OnNewArticle(Entity<NewscasterComponent> ent, NewsArticle article)
     {
-        _chat.TrySendInGameICMessage(ent.Owner, article.Title, InGameICChatType.Speak, hideChat: true);
-        UpdateNewscasterUiState(ent);
+        UpdateNewscaster(ent);
+
+        if (_powerReceiver.IsPowered(ent.Owner))
+            _chat.TrySendInGameICMessage(ent.Owner, article.Title, InGameICChatType.Speak, hideChat: true);
     }
 
     /// <summary>
     /// Update the UI state for a newscaster entity
     /// </summary>
-    public void UpdateNewscasterUiState(Entity<NewscasterComponent> ent)
+    public void UpdateNewscaster(Entity<NewscasterComponent> ent)
     {
         if (!TryGetArticles(ent.Owner, out var articles))
             return;
 
-        var state = new NewscasterBoundUserInterfaceState(articles);
-        _ui.SetUiState(ent.Owner, NewscasterUiKey.Key, state);
+        ent.Comp.Articles = articles;
+        Dirty(ent);
     }
 
     private bool TryGetArticles(EntityUid uid, [NotNullWhen(true)] out List<NewsArticle>? articles)
@@ -60,5 +64,9 @@ public sealed class NewscasterSystem : EntitySystem
 
         articles = stationNews.Articles;
         return true;
+    }
+
+    protected virtual void UpdateUi(Entity<NewscasterComponent> ent)
+    {
     }
 }
