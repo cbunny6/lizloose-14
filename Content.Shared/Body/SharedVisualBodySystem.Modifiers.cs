@@ -58,7 +58,6 @@ public abstract partial class SharedVisualBodySystem
     {
         if (!Resolve(source, ref source.Comp) || !Resolve(target, ref target.Comp))
             return;
-
         //UM START
         if (TryComp<HumanoidProfileComponent>(source, out var humanoidProfile))
         {
@@ -71,7 +70,6 @@ public abstract partial class SharedVisualBodySystem
             _humanoidProfile.ApplyProfileTo(target.Owner, profile);
         }
         //UM END
-
         var sourceOrgans = _container.EnsureContainer<Container>(source, BodyComponent.ContainerID);
 
         foreach (var sourceOrgan in sourceOrgans.ContainedEntities)
