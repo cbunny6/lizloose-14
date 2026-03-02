@@ -15,6 +15,8 @@ namespace Content.Client._UM.UserInterface.Controls;
 [GenerateTypedNameReferences]
 public sealed partial class FancySpeechBubble : Control
 {
+    public static readonly Regex FontRegex = new(@"\[font=([^\s\]]+)\s+size=(\d+)\]", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+
     private readonly ChatUIController _chatUIController;
 
     private readonly int _wordWrapLength = 32;
@@ -54,7 +56,7 @@ public sealed partial class FancySpeechBubble : Control
     /// </summary>
     private (string? FontName, int? FontSize) ParseFont(string input)
     {
-        var match = Regex.Match(input, @"\[font=([^\s\]]+)\s+size=(\d+)\]", RegexOptions.IgnoreCase);
+        var match = FontRegex.Match(input);
 
         if (match.Success)
         {
