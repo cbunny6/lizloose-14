@@ -32,9 +32,11 @@
       mix: '#947507'
   - type: StaticPrice
     price: 40
+    #UM START
   - type: LimitedCharges
-    maxCharges: 60
+    maxCharges: 30
     lastCharges: 30
+    #UM END
   - type: PhysicalComposition
     materialComposition:
       Steel: 100
@@ -72,7 +74,9 @@
   description: A cartridge of highly compressed paint, commonly used in spray painters.
   components:
   - type: SprayPainterAmmo
+    #UM START
     charges: 30
+    #UM END
   - type: Sprite
     sprite: Objects/Tools/spray_painter.rsi
     state: ammo
