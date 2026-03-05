@@ -40,10 +40,12 @@
   components:
   - type: Projectile
     damage:
+      #UM START
       types:
         Piercing: 30 # 15% decrease
         Structural: 10
     ignoreResistances: true # its basically doing 40 structural
+      #UM FINISH
 
 - type: entity
   parent: BaseBulletUranium

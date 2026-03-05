@@ -28,6 +28,7 @@
   categories:
   - UplinkWeaponry
 
+#UM START
 # Ammo does structural, so you can use it like an access breaker
 # Can break cap's locker in 4 shots (AP applies to structural)
 - type: listing
@@ -42,6 +43,7 @@
     Telecrystal: 5
   categories:
   - UplinkWeaponry
+#UM FINISH
 
 # Poor accuracy, slow to fire, cheap option
 - type: listing
